@@ -160,6 +160,7 @@ class TestRun(models.Model):
     """A TestRun is a single test run result
     """
     date_created = models.DateTimeField("date created", auto_now_add=True)
+    date_run = models.DateTimeField("date run", auto_now_add=False, blank=False)
     dyninst = models.ForeignKey("main.RepositoryState", null=False, blank=False, on_delete=models.CASCADE, related_name="testrun_dyninst")
     testsuite = models.ForeignKey("main.RepositoryState", null=False, blank=False, on_delete=models.CASCADE, related_name="testrun_testsuite")
     environment = models.ForeignKey("main.Environment", null=False, blank=False, on_delete=models.CASCADE)
@@ -177,8 +178,8 @@ class TestRun(models.Model):
 
     class Meta:
         app_label = "main"
-        unique_together = (("dyninst", "testsuite", "environment", "compiler"),)
- 
+        unique_together = (("dyninst", "testsuite", "environment", "compiler", "date_run"),)
+
 class TestResult(models.Model):
     run = models.ForeignKey("main.TestRun", null=False, blank=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=150, blank=False, null=False)
