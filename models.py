@@ -115,7 +115,6 @@ class BuildResults(models.Model):
 class Environment(models.Model):
     hostname = models.CharField(max_length=150, blank=False, null=False)
     arch = models.CharField(max_length=50, blank=False, null=False)
-    vendor = models.CharField(max_length=50, blank=False, null=False)
     host_os = models.CharField(max_length=150, blank=False, null=False)
 
     dependencies = models.ManyToManyField(
@@ -135,7 +134,7 @@ class Environment(models.Model):
     class Meta:
         app_label = "main"
         unique_together = (
-            ("hostname", "arch", "host_os", "vendor"),
+            ("hostname", "arch", "host_os"),
         )
 
 
