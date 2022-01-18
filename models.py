@@ -15,6 +15,7 @@ class PullRequest(models.Model):
     """
     url = models.TextField(blank=False, null=False)
     user = models.TextField(blank=False, null=False)
+    github_id = models.PositiveIntegerField(blank=True, null=False)
 
     def __str__(self):
         return "[pull_request|%s]" % self.url
@@ -24,7 +25,7 @@ class PullRequest(models.Model):
 
     class Meta:
         app_label = "main"
-        unique_together = (("url", "user"),)
+        unique_together = (("url", "user", "github_id"),)
 
 
 class Compiler(models.Model):
