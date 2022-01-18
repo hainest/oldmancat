@@ -30,7 +30,7 @@ class PullRequest(models.Model):
 
 class Compiler(models.Model):
     name = models.CharField(blank=False, null=False, max_length=100, unique=True)
-    version = models.CharField(blank=False, null=False, max_length=100, unique=True)
+    version = models.CharField(blank=True, null=False, max_length=100)
     path = models.CharField(blank=True, null=True, max_length=100)
     language = models.CharField(choices=LANGUAGES, blank=True, null=True, max_length=100, unique=True)
 
