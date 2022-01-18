@@ -77,13 +77,29 @@ class Dependency(models.Model):
 
 
 class TestRunResult(models.Model):
-    dyninst_build_success = models.BooleanField(default=False)
+    dyninst_build = models.ForeignKey("main.BuildResults", null=False, blank=False, on_delete=models.CASCADE)
+    testsuite_build = models.ForeignKey("main.BuildResults", null=False, blank=False, on_delete=models.CASCADE)
     test_run_status = models.CharField(choices=TEST_RUN_STATUS, default="NOTRUN", blank=False, null=False, max_length=25)
-    test_build_status = models.CharField(choices=TEST_BUILD_STATUS, default="NOTBUILT", blank=False, null=False, max_length=25)
     test_log = models.FileField(upload_to=get_upload_folder, max_length=255, storage=OverwriteStorage())
 
     def __str__(self):
         return "[test-run-result|%s]" % self.id
+
+    def __repr__(self):
+        return str(self)
+
+    class Meta:
+        app_label = "main"
+
+
+class BuildResults(models.Model):
+    status = models.CharField(choices=TEST_BUILD_STATUS, default="OK", blank=False, null=False, max_length=25)
+    num_jobs = models.PositiveIntegerField(default=0, blank=True)
+    time = models.PositiveIntegerField(default=0, blank=True)
+    log = models.FileField(upload_to=get_upload_folder, max_length=255, storage=OverwriteStorage(), blank=True)
+
+    def __str__(self):
+        return "[build-result|%s]" % self.id
 
     def __repr__(self):
         return str(self)
