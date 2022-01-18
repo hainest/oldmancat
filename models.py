@@ -202,7 +202,7 @@ class TestResult(models.Model):
         return str(self)
 
     @property
-    def isStatus(self):
+    def isStatic(self):
         return not self.isDynamic
 
     class Meta:
