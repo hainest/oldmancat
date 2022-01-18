@@ -63,6 +63,7 @@ class TestMode(models.Model):
 class Dependency(models.Model):
     name = models.CharField(max_length=250, blank=False, null=False)
     version = models.CharField(max_length=100, blank=False, null=False)
+    path = models.CharField(blank=True, null=True, max_length=100)
 
     def __str__(self):
         return "[dependency|%s@%s]" % (self.name, self.version)
