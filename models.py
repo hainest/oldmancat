@@ -167,7 +167,7 @@ class TestRun(models.Model):
     pull_request = models.ForeignKey("main.PullRequest", null=True, blank=True, on_delete=models.CASCADE)
     cirun_url = models.CharField(max_length=250, blank=True, null=True)
     compiler = models.ForeignKey("main.Compiler", null=True, blank=True, on_delete=models.CASCADE)
-    result = models.ForeignKey("main.TestRunResult", null=True, blank=True, on_delete=models.CASCADE)
+    result = models.ForeignKey("main.TestRunResult", blank=False, on_delete=models.CASCADE)
     command = models.TextField()
 
     def __str__(self):
