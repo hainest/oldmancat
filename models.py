@@ -80,6 +80,10 @@ class TestRunResult(models.Model):
     dyninst_build = models.ForeignKey("main.BuildResults", null=False, blank=False, on_delete=models.CASCADE)
     testsuite_build = models.ForeignKey("main.BuildResults", null=False, blank=False, on_delete=models.CASCADE)
     test_run_status = models.CharField(choices=TEST_RUN_STATUS, default="NOTRUN", blank=False, null=False, max_length=25)
+    is_single_step = models.BooleanField(blank=True, null=True)
+    num_parallel_tests = models.PositiveIntegerField(default=0, blank=True)
+    num_omp_threads = models.PositiveIntegerField(default=0, blank=True)
+    time = models.PositiveIntegerField(default=0, blank=True)
     test_log = models.FileField(upload_to=get_upload_folder, max_length=255, storage=OverwriteStorage())
 
     def __str__(self):
