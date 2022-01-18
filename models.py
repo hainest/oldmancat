@@ -208,7 +208,7 @@ class TestResult(models.Model):
     class Meta:
         app_label = "main"
         unique_together = (
-            ("name", "run", "compiler", "test_mode"),
+            ("run", "name", "compiler", "test_mode", "isPic", "is64bit", "isDynamic", "optimization", "threading"),
         )
 
 
