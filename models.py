@@ -190,7 +190,7 @@ class TestResult(models.Model):
     is64bit = models.BooleanField(default=False)
     isDynamic = models.BooleanField(default=False)
 
-    reason = models.TextField()
+    reason = models.TextField(blank=True)
     optimization = models.CharField(max_length=150, blank=False, null=False)
     status = models.CharField(choices=TEST_RESULT_STATUS, default="NOSTATUS", blank=False, null=False, max_length=25)
     threading = models.TextField()
