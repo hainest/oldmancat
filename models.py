@@ -143,6 +143,7 @@ class RepositoryState(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
     commit = models.CharField(max_length=50, blank=False, null=False)
     branch = models.CharField(max_length=100, blank=False, null=False)
+    history = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return "[repository:%s|%s]" % (self.name, self.commit)
