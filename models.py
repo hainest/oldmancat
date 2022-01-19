@@ -47,7 +47,6 @@ class Compiler(models.Model):
         )
 
 
-
 class TestMode(models.Model):
     name = models.CharField(choices=TEST_MODES, blank=False, null=False, max_length=25, unique=True)
 
@@ -59,6 +58,7 @@ class TestMode(models.Model):
 
     class Meta:
         app_label = "main"
+
 
 class Dependency(models.Model):
     name = models.CharField(max_length=250, blank=False, null=False)
@@ -180,6 +180,7 @@ class TestRun(models.Model):
         app_label = "main"
         unique_together = (("dyninst", "testsuite", "environment", "compiler", "date_run"),)
 
+
 class TestResult(models.Model):
     run = models.ForeignKey("main.TestRun", null=False, blank=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=150, blank=False, null=False)
@@ -194,7 +195,7 @@ class TestResult(models.Model):
     optimization = models.CharField(max_length=150, blank=False, null=False)
     status = models.CharField(choices=TEST_RESULT_STATUS, default="NOSTATUS", blank=False, null=False, max_length=25)
     threading = models.TextField()
-    
+
     def __str__(self):
         return "[test-result for %s:%s]" % (self.run.id, self.name)
 
